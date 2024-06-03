@@ -1,0 +1,105 @@
+[gd_scene load_steps=7 format=3 uid="uid://cj756y6ig2o7d"]
+
+[ext_resource type="Script" path="res://assets/scripts/menu.gd" id="1_dto55"]
+[ext_resource type="Texture2D" uid="uid://d7pc8f5tkdfy" path="res://assets/imagenes/background/bg-preview.png" id="2_xm48x"]
+[ext_resource type="Theme" uid="uid://bv28omvclltdq" path="res://assets/menu.tres" id="3_b74ki"]
+[ext_resource type="FontFile" uid="uid://detq26wmaujmd" path="res://assets/imagenes/background/EastmanRomanTrial-Bold.otf" id="4_qrpsm"]
+
+[sub_resource type="Theme" id="Theme_07dec"]
+
+[sub_resource type="Theme" id="Theme_d53xa"]
+default_font = ExtResource("4_qrpsm")
+
+[node name="Menu" type="Control"]
+clip_children = 1
+texture_filter = 1
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+script = ExtResource("1_dto55")
+
+[node name="BG" type="TextureRect" parent="."]
+layout_mode = 0
+offset_left = -116.0
+offset_top = -60.0
+offset_right = 156.0
+offset_bottom = 100.0
+texture = ExtResource("2_xm48x")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -116.0
+offset_top = -60.0
+offset_right = 116.0
+offset_bottom = 60.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("3_b74ki")
+metadata/_edit_group_ = true
+
+[node name="Main" type="VBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="Tittle" type="VBoxContainer" parent="MarginContainer/Main"]
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="Tittle_1" type="Label" parent="MarginContainer/Main/Tittle"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 14
+text = "LEEDEO SAPCE"
+
+[node name="Tittle_2" type="Label" parent="MarginContainer/Main/Tittle"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme = SubResource("Theme_07dec")
+theme_override_colors/font_color = Color(0.898039, 0.815686, 0.239216, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("4_qrpsm")
+theme_override_font_sizes/font_size = 20
+text = "SHOOTER 2D"
+
+[node name="Buttons" type="HBoxContainer" parent="MarginContainer/Main"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="Start" type="Button" parent="MarginContainer/Main/Buttons"]
+layout_mode = 2
+text = "REINICIA"
+
+[node name="Exit" type="Button" parent="MarginContainer/Main/Buttons"]
+texture_filter = 1
+layout_mode = 2
+theme = SubResource("Theme_d53xa")
+theme_override_colors/font_color = Color(1, 0.750801, 0.352858, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 6
+theme_override_fonts/font = ExtResource("4_qrpsm")
+theme_override_font_sizes/font_size = 12
+text = "SALIR"
+
+[node name="Copyright" type="Label" parent="MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 8
+text = "TUTORIAL DE DESARROLLO POR LEEDEO"
+
+[connection signal="pressed" from="MarginContainer/Main/Buttons/Start" to="." method="_on_start_pressed"]
+[connection signal="pressed" from="MarginContainer/Main/Buttons/Exit" to="." method="_on_exit_pressed"]

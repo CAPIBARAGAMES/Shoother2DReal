@@ -1,0 +1,84 @@
+[gd_scene load_steps=11 format=3 uid="uid://cpf6knx4315ig"]
+
+[ext_resource type="Texture2D" uid="uid://cf3ka0txhsjts" path="res://assets/imagenes/player/sprites/player1.png" id="1_hl4p7"]
+[ext_resource type="Script" path="res://assets/scripts/player.gd" id="1_q5ir1"]
+[ext_resource type="PackedScene" uid="uid://cuukksyxoqn21" path="res://scenes/shot.tscn" id="2_s44o8"]
+[ext_resource type="Texture2D" uid="uid://bqjshwjwwf5b8" path="res://assets/imagenes/player/sprites/player2.png" id="2_ueo56"]
+[ext_resource type="Texture2D" uid="uid://d1xcds12vb4jn" path="res://assets/imagenes/player/sprites/player3.png" id="3_gejc6"]
+[ext_resource type="Texture2D" uid="uid://binwsdy4qdhv6" path="res://assets/imagenes/flash/flash.png" id="5_wd144"]
+[ext_resource type="AudioStream" uid="uid://ctlmbpjklw1u0" path="res://assets/audio/Sound FX/shot 1.wav" id="6_vu11b"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ooiqw"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_ueo56")
+}],
+"loop": true,
+"name": &"Down",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_hl4p7")
+}],
+"loop": true,
+"name": &"Idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_gejc6")
+}],
+"loop": true,
+"name": &"Up",
+"speed": 5.0
+}]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_vo77o"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("5_wd144")
+}, {
+"duration": 1.0,
+"texture": null
+}],
+"loop": false,
+"name": &"Flas",
+"speed": 10.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_2udot"]
+size = Vector2(26, 10)
+
+[node name="Player" type="CharacterBody2D"]
+position = Vector2(8, 0)
+motion_mode = 1
+script = ExtResource("1_q5ir1")
+shot = ExtResource("2_s44o8")
+metadata/_edit_group_ = true
+
+[node name="Scpaceship" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_ooiqw")
+animation = &"Idle"
+autoplay = "Idle"
+
+[node name="Flash" type="AnimatedSprite2D" parent="."]
+position = Vector2(18, 0)
+sprite_frames = SubResource("SpriteFrames_vo77o")
+animation = &"Flas"
+frame = 1
+
+[node name="Collision" type="CollisionShape2D" parent="."]
+position = Vector2(0, -1)
+shape = SubResource("RectangleShape2D_2udot")
+
+[node name="Settings" type="Node2D" parent="."]
+
+[node name="ShotsSpawn" type="Marker2D" parent="Settings"]
+position = Vector2(13, 0)
+
+[node name="AudioShot" type="AudioStreamPlayer2D" parent="Settings"]
+stream = ExtResource("6_vu11b")
+volume_db = -12.4
